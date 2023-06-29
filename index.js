@@ -2,7 +2,7 @@
 // @name         bili-cleaner
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  clear bilibili followers
+// @description  quickly clear bilibili resource such as favlist, follows
 // @author       kwongliegaai
 // @match        https://space.bilibili.com/*/fans/follow*
 // @match        https://space.bilibili.com/*/favlist*
