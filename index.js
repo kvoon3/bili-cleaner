@@ -4,8 +4,8 @@
 // @version      0.1
 // @description  clear bilibili followers
 // @author       kwongliegaai
-// @match        https://space.bilibili.com/17061099/fans/follow*
-// @match        https://space.bilibili.com/17061099/favlist*
+// @match        https://space.bilibili.com/*/fans/follow*
+// @match        https://space.bilibili.com/*/favlist*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=bilibili.com
 // @grant        GM_unregisterMenuCommand
 // @grant        GM_registerMenuCommand
