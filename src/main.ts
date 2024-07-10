@@ -1,4 +1,4 @@
-import { is_debug, matchRecords } from './states'
+import { matchRecords } from './states'
 import { intervalForEach, intervalQuerySelectorAll, useCommand, useOption } from './utils'
 
 const autoNextPage = useOption('auto_next_page', 'Auto Next Page', true)
@@ -16,7 +16,7 @@ function autoClick(innerText: string, opts?: { nextPage?: boolean }) {
   )
     .then((cancelBtnList) => {
       intervalForEach(cancelBtnList, (btn, idx) => {
-        if (is_debug)
+        if (import.meta.env.DEV)
           console.log('btn', btn, idx)
         else
           btn.click()
