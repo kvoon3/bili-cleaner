@@ -1,5 +1,5 @@
 {
-  "name": "pkg-name",
+  "name": "bili-cleaner",
   "type": "module",
   "version": "0.0.1",
   "packageManager": "pnpm@8.6.0",
@@ -12,25 +12,24 @@
     "url": "git+https://github.com/kwoon3/bili-cleaner.git"
   },
   "scripts": {
-    "lint": "eslint .",
-    "release": "bumpp && npm publish"
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.4",
     "@antfu/ni": "^0.21.3",
-    "@antfu/utils": "^0.7.4",
+    "@types/micromatch": "^4.0.9",
     "@types/node": "^18.16.16",
     "bumpp": "^9.1.0",
+    "consola": "^3.2.3",
     "eslint": "^8.41.0",
-    "esno": "^0.16.3",
     "lint-staged": "^13.2.2",
-    "pnpm": "^8.6.0",
-    "rimraf": "^5.0.1",
+    "micromatch": "^4.0.7",
     "simple-git-hooks": "^2.8.1",
-    "typescript": "^5.0.4",
-    "unbuild": "^1.2.1",
-    "vite": "^4.3.9",
-    "vitest": "^0.31.3"
+    "typescript": "^5.4.5",
+    "vite": "^5.2.12",
+    "vite-plugin-monkey": "^4.0.0"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
