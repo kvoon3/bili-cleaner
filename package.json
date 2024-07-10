@@ -1,7 +1,7 @@
 {
   "name": "bili-cleaner",
   "type": "module",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "packageManager": "pnpm@8.6.0",
   "description": "",
   "author": "kwongliegaai <a1176079417@gmail.com>",
