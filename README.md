@@ -1,3 +1,3 @@
 # Bili-cleaner
 
-[Greasy Fork](https://greasyfork.org/zh-CN/scripts/469711-bili-cleaner/code)
+[Greasy Fork](https://greasyfork.org/zh-CN/scripts/500208-bilibili-cleaner)
