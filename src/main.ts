@@ -1,4 +1,3 @@
-import { logger } from './logger'
 import { is_debug, matchRecords } from './states'
 import { intervalForEach, intervalQuerySelectorAll, useCommand, useOption } from './utils'
 
@@ -18,7 +17,7 @@ function autoClick(innerText: string, opts?: { nextPage?: boolean }) {
     .then((cancelBtnList) => {
       intervalForEach(cancelBtnList, (btn, idx) => {
         if (is_debug)
-          logger.log('btn', btn, idx)
+          console.log('btn', btn, idx)
         else
           btn.click()
       })
@@ -28,9 +27,9 @@ function autoClick(innerText: string, opts?: { nextPage?: boolean }) {
             autoClick(innerText, opts)
           }
         })
-        .catch(({ message }: Error) => logger.error(message))
+        .catch(({ message }: Error) => console.error(message))
     })
-    .catch(({ message }: Error) => logger.error(message))
+    .catch(({ message }: Error) => console.error(message))
 }
 
 useCommand('Clean Favorite', () => {

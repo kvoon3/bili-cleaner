@@ -1,5 +1,4 @@
 import { isMatch } from 'micromatch'
-import { logger } from './logger'
 import { GM_getValue, GM_registerMenuCommand, GM_setValue, GM_unregisterMenuCommand, monkeyWindow } from '$'
 
 export function useOption(key: string, title: string, defaultValue: boolean) {
@@ -35,7 +34,7 @@ export function useCommand(title: string, callback: () => void, opts?: {
     matchUrl,
   } = opts || {}
 
-  logger.log('matchUrl', matchUrl)
+  console.log('matchUrl', matchUrl)
 
   if (!matchUrl) {
     GM_registerMenuCommand(title, callback)
@@ -77,7 +76,7 @@ export function intervalForEach<T>(
     let idx = 0
 
     const timer = setInterval(() => {
-      logger.log('intervalForEach')
+      console.log('intervalForEach')
       callback(list[idx], idx)
 
       if (idx === list.length - 1) {
@@ -108,7 +107,7 @@ export function intervalQuerySelectorAll<T extends Element>(
   let tryTimes = 0
   return new Promise((resolve, reject) => {
     const timer = setInterval(() => {
-      logger.log('intervalQuerySelectorAll')
+      console.log('intervalQuerySelectorAll')
       const elList = Array.from(
         document.querySelectorAll(selector) as NodeListOf<T>,
       )
@@ -121,10 +120,10 @@ export function intervalQuerySelectorAll<T extends Element>(
       else {
         tryTimes++
 
-        logger.log('tryTimes', tryTimes)
+        console.log('tryTimes', tryTimes)
 
         if (tryTimes >= maxTryTimes) {
-          logger.log('timeout')
+          console.log('timeout')
 
           clearInterval(timer)
           reject(new Error('timeout'))

@@ -21,15 +21,14 @@
     "@antfu/ni": "^0.21.3",
     "@types/micromatch": "^4.0.9",
     "@types/node": "^18.16.16",
-    "bumpp": "^9.1.0",
-    "consola": "^3.2.3",
     "eslint": "^8.41.0",
     "lint-staged": "^13.2.2",
     "micromatch": "^4.0.7",
     "simple-git-hooks": "^2.8.1",
     "typescript": "^5.4.5",
     "vite": "^5.2.12",
-    "vite-plugin-monkey": "^4.0.0"
+    "vite-plugin-monkey": "^4.0.0",
+    "vite-plugin-node-polyfills": "^0.22.0"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
