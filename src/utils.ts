@@ -1,4 +1,5 @@
 import { isMatch } from 'micromatch'
+import { objectKeys } from '@antfu/utils'
 import { GM_getValue, GM_registerMenuCommand, GM_setValue, GM_unregisterMenuCommand, monkeyWindow } from '$'
 
 export function useOption(key: string, title: string, defaultValue: boolean) {
@@ -65,7 +66,7 @@ export function intervalForEach<T>(
   }) {
   return new Promise((resolve) => {
     const {
-      delay = 250,
+      delay = 500,
     } = opts || {}
 
     if (!list.length) {
@@ -93,15 +94,21 @@ export function intervalForEach<T>(
 export function intervalQuerySelectorAll<T extends Element>(
   selector: string,
   opts?: {
+    from?: Element
     delay?: number
     innerText?: string
+    attrs?: Record<string, string>
+    noAttrs?: Record<string, string>
     maxTryTimes?: number
   },
 ): Promise<Array<T>> {
   const {
-    delay = 300,
+    from = document,
+    delay = 500,
     innerText = '',
     maxTryTimes = 5,
+    attrs = {},
+    noAttrs = {},
   } = opts || {}
 
   let tryTimes = 0
@@ -109,9 +116,22 @@ export function intervalQuerySelectorAll<T extends Element>(
     const timer = setInterval(() => {
       console.log('intervalQuerySelectorAll')
       const elList = Array.from(
-        document.querySelectorAll(selector) as NodeListOf<T>,
+        from.querySelectorAll(selector) as NodeListOf<T>,
       )
-        .filter(el => innerText ? el.innerHTML.includes(innerText) : true)
+        .filter((el) => {
+          if (innerText && !el.innerHTML.includes(innerText))
+            return false
+
+          const attrkeys = objectKeys(attrs)
+          if (attrkeys.length)
+            return attrkeys.every(key => el.getAttribute(key) === attrs[key])
+
+          const noAttrKeys = objectKeys(noAttrs)
+          if (noAttrKeys.length)
+            return noAttrKeys.every(key => el.getAttribute(key) !== noAttrs[key])
+
+          return true
+        })
 
       if (elList && elList.length) {
         clearInterval(timer)
@@ -123,7 +143,7 @@ export function intervalQuerySelectorAll<T extends Element>(
         console.log('tryTimes', tryTimes)
 
         if (tryTimes >= maxTryTimes) {
-          console.log('timeout')
+          console.log('timeout', selector)
 
           clearInterval(timer)
           reject(new Error('timeout'))

@@ -14,6 +14,9 @@ importers:
       '@antfu/ni':
         specifier: ^0.21.3
         version: 0.21.3
+      '@antfu/utils':
+        specifier: ^0.7.10
+        version: 0.7.10
       '@types/micromatch':
         specifier: ^4.0.9
         version: 4.0.9
@@ -146,6 +149,10 @@ packages:
   /@antfu/ni@0.21.3:
     resolution: {integrity: sha512-iDtQMeMW1kKV4nzQ+tjYOIPUm6nmh7pJe4sM0kx1jdAChKSCBLStqlgIoo5Tce++p+o8cBiWIzC3jg6oHyjzMA==}
     hasBin: true
+    dev: true
+
+  /@antfu/utils@0.7.10:
+    resolution: {integrity: sha512-+562v9k4aI80m1+VuMHehNJWLOFjBnXn3tdOitzD0il5b7smkSBal4+a3oKiQTbrwMmN/TBUMDvbdoWDehgOww==}
     dev: true
 
   /@babel/code-frame@7.21.4:
