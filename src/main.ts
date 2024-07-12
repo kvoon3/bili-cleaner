@@ -33,9 +33,9 @@ function autoClick(innerText: string, opts?: { nextPage?: boolean }) {
 }
 
 async function unsubscribeAll() {
-  const [test] = await intervalQuerySelectorAll<HTMLDivElement>('#fav-list-container')
+  const [favlistContainer] = await intervalQuerySelectorAll<HTMLDivElement>('#fav-list-container')
   await intervalForEach(Array.from({ length: 10 }), () => {
-    test.dispatchEvent(new WheelEvent('wheel', { deltaY: 9999 }))
+    favlistContainer.dispatchEvent(new WheelEvent('wheel', { deltaY: 9999 }))
   }, {
     delay: 1000,
   })
