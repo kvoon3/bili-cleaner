@@ -3,14 +3,14 @@ import { intervalForEach, intervalQuerySelectorAll, useCommand, useOption } from
 
 const autoNextPage = useOption('auto_next_page', 'Auto Next Page', true)
 
-async function autoClick(innerText: string, opts?: { nextPage?: boolean }) {
+async function autoClick(textContent: string, opts?: { nextPage?: boolean }) {
   const {
     nextPage = true,
   } = opts || {}
 
   const nextPageBtn: HTMLButtonElement | undefined = nextPage ? document.querySelector('.be-pager-next') : undefined
 
-  const cancelBtnList = await intervalQuerySelectorAll<HTMLButtonElement>('.be-dropdown-item', { innerText })
+  const cancelBtnList = await intervalQuerySelectorAll<HTMLButtonElement>('.be-dropdown-item', { textContent })
 
   await intervalForEach(cancelBtnList, (btn, idx) => {
     if (import.meta.env.DEV)
@@ -21,7 +21,7 @@ async function autoClick(innerText: string, opts?: { nextPage?: boolean }) {
 
   if (nextPage && nextPageBtn) {
     nextPageBtn.click()
-    autoClick(innerText, opts)
+    autoClick(textContent, opts)
   }
 }
 
@@ -33,7 +33,7 @@ async function unsubscribeAll() {
     delay: 1000,
   })
 
-  const unsubscribeBtnList = await intervalQuerySelectorAll<HTMLButtonElement>('.be-dropdown-item', { innerText: '取消订阅' })
+  const unsubscribeBtnList = await intervalQuerySelectorAll<HTMLButtonElement>('.be-dropdown-item', { textContent: '取消订阅' })
   intervalForEach(unsubscribeBtnList, btn => btn.click())
 }
 

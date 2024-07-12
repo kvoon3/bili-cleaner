@@ -63,7 +63,8 @@ export function intervalForEach<T>(
   callback: (item: T, idx: number) => void,
   opts?: {
     delay?: number
-  }) {
+  },
+) {
   return new Promise((resolve) => {
     const {
       delay = 500,
@@ -96,7 +97,7 @@ export function intervalQuerySelectorAll<T extends Element>(
   opts?: {
     from?: Element
     delay?: number
-    innerText?: string
+    textContent?: string
     attrs?: Record<string, string>
     noAttrs?: Record<string, string>
     maxTryTimes?: number
@@ -105,7 +106,7 @@ export function intervalQuerySelectorAll<T extends Element>(
   const {
     from = document,
     delay = 500,
-    innerText = '',
+    textContent = '',
     maxTryTimes = 5,
     attrs = {},
     noAttrs = {},
@@ -119,7 +120,7 @@ export function intervalQuerySelectorAll<T extends Element>(
         from.querySelectorAll(selector) as NodeListOf<T>,
       )
         .filter((el) => {
-          if (innerText && !el.innerHTML.includes(innerText))
+          if (textContent && !el.innerHTML.includes(textContent))
             return false
 
           const attrkeys = objectKeys(attrs)
