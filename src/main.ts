@@ -3,33 +3,26 @@ import { intervalForEach, intervalQuerySelectorAll, useCommand, useOption } from
 
 const autoNextPage = useOption('auto_next_page', 'Auto Next Page', true)
 
-function autoClick(innerText: string, opts?: { nextPage?: boolean }) {
+async function autoClick(innerText: string, opts?: { nextPage?: boolean }) {
   const {
     nextPage = true,
   } = opts || {}
 
   const nextPageBtn: HTMLButtonElement | undefined = nextPage ? document.querySelector('.be-pager-next') : undefined
 
-  intervalQuerySelectorAll<HTMLButtonElement>(
-    '.be-dropdown-item',
-    { innerText },
-  )
-    .then((cancelBtnList) => {
-      intervalForEach(cancelBtnList, (btn, idx) => {
-        if (import.meta.env.DEV)
-          console.log('btn', btn, idx)
-        else
-          btn.click()
-      }, { delay: 1000 })
-        .then(() => {
-          if (nextPage && nextPageBtn) {
-            nextPageBtn.click()
-            autoClick(innerText, opts)
-          }
-        })
-        .catch(({ message }: Error) => console.error(message))
-    })
-    .catch(({ message }: Error) => console.error(message))
+  const cancelBtnList = await intervalQuerySelectorAll<HTMLButtonElement>('.be-dropdown-item', { innerText })
+
+  await intervalForEach(cancelBtnList, (btn, idx) => {
+    if (import.meta.env.DEV)
+      console.log('btn', btn, idx)
+    else
+      btn.click()
+  }, { delay: 1000 })
+
+  if (nextPage && nextPageBtn) {
+    nextPageBtn.click()
+    autoClick(innerText, opts)
+  }
 }
 
 async function unsubscribeAll() {
