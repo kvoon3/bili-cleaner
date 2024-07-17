@@ -35,8 +35,6 @@ export function useCommand(title: string, callback: () => void, opts?: {
     matchUrl,
   } = opts || {}
 
-  console.log('matchUrl', matchUrl)
-
   if (!matchUrl) {
     GM_registerMenuCommand(title, callback)
   }
@@ -78,7 +76,6 @@ export function intervalForEach<T>(
     let idx = 0
 
     const timer = setInterval(() => {
-      console.log('intervalForEach')
       callback(list[idx], idx)
 
       if (idx === list.length - 1) {
@@ -115,7 +112,6 @@ export function intervalQuerySelectorAll<T extends Element>(
   let tryTimes = 0
   return new Promise((resolve, reject) => {
     const timer = setInterval(() => {
-      console.log('intervalQuerySelectorAll')
       const elList = Array.from(
         from.querySelectorAll(selector) as NodeListOf<T>,
       )
@@ -141,11 +137,7 @@ export function intervalQuerySelectorAll<T extends Element>(
       else {
         tryTimes++
 
-        console.log('tryTimes', tryTimes)
-
         if (tryTimes >= maxTryTimes) {
-          console.log('timeout', selector)
-
           clearInterval(timer)
           reject(new Error('timeout'))
         }

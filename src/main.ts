@@ -12,12 +12,7 @@ async function autoClick(textContent: string, opts?: { nextPage?: boolean }) {
 
   const cancelBtnList = await intervalQuerySelectorAll<HTMLButtonElement>('.be-dropdown-item', { textContent })
 
-  await intervalForEach(cancelBtnList, (btn, idx) => {
-    if (import.meta.env.DEV)
-      console.log('btn', btn, idx)
-    else
-      btn.click()
-  }, { delay: 1000 })
+  await intervalForEach(cancelBtnList, btn => btn.click(), { delay: 1000 })
 
   if (nextPage && nextPageBtn) {
     nextPageBtn.click()
